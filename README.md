@@ -1,4 +1,3 @@
-# Cinema_reservation_java
 # 🎬 Cinema Reservation System 🎟️
 
 ## 📖 Project Overview
@@ -56,3 +55,99 @@ The **Cinema Reservation System** is a Java Spring Boot web application that all
 ```bash
 git clone https://github.com/Barbarossa01/Cinema_reservation_java.git
 cd Cinema_reservation_java
+```
+
+### 2️⃣ Configure the Database
+Ensure you have PostgreSQL installed and create a database:
+```sql
+CREATE DATABASE cinema_reservation;
+```
+Update `application.properties` with your database credentials:
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/cinema_reservation
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+spring.jpa.hibernate.ddl-auto=update
+```
+
+### 3️⃣ Run the Application
+```bash
+mvn spring-boot:run
+```
+
+The application will be accessible at:  
+**[http://localhost:8080](http://localhost:8080)**
+
+---
+
+## 🔑 Default User Credentials (For Testing)
+
+| Role         | Email                  | Password  |
+|---------------|-----------------------|-----------|
+| **Admin**     | admin@cinema.com       | admin123  |
+| **Admin**     | admin@admin.com        | admin12345|
+| **User**      | user@cinema.com        | user123   |
+| **User**      | maja@maja.maja         | maja123   |
+
+*(You can change these credentials in the database.)*
+
+---
+
+## 📺 Application Screenshots
+
+### 🎥 Film Listing Page (Anonymous User)
+![Film Listing](https://via.placeholder.com/800x400?text=Film+Listing)
+
+### 🎫 Ticket Reservation (Authenticated User)
+![Reservation](https://via.placeholder.com/800x400?text=Ticket+Reservation)
+
+### ⚙️ Admin Dashboard
+![Admin Dashboard](https://via.placeholder.com/800x400?text=Admin+Dashboard)
+
+---
+
+## 🔍 API Endpoints Overview *(if applicable)*
+
+| HTTP Method | Endpoint             | Description                           |
+|-------------|----------------------|---------------------------------------|
+| `GET`       | `/films`             | View all available films              |
+| `GET`       | `/films/{id}`        | View film details                     |
+| `POST`      | `/films/{id}/reserve`| Reserve tickets for a film            |
+| `POST`      | `/admin/films`       | Add a new film (Admin only)           |
+| `DELETE`    | `/admin/films/{id}`  | Delete a film (Admin only)            |
+
+---
+
+## 🛡️ Security Measures
+
+- **Password Encryption**: User passwords are stored securely using BCrypt.
+- **Role-Based Access Control**: Access to sensitive actions is restricted.
+- **Input Validation**: Forms are validated on both client and server sides to prevent injection attacks.
+
+---
+
+## 🔮 Future Improvements (Roadmap)
+
+- 🎯 Add payment integration (e.g., Stripe/PayPal) for ticket payments.
+- 🎯 Implement seat selection during reservation.
+- 🎯 Improve UI/UX with React or Vue.js.
+- 🎯 Add user activity logs for better monitoring.
+
+---
+
+## 🧑‍💻 Contributors
+
+- **Mohammed** *(Project Owner/Developer)*  
+  GitHub: [Barbarossa01](https://github.com/Barbarossa01)
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+🎬 **Enjoy using the Cinema Reservation System!** 🍿  
+Feel free to fork, improve, and contribute! 🤝
+
