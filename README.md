@@ -111,7 +111,7 @@ The application will be accessible at:
 
 ## 🧑‍💻 Contributors
 
-- **Mohammed** *(Project Owner/Developer)*  
+- **Zain Din** *(Project Owner/Developer)*  
   GitHub: [Barbarossa01](https://github.com/Barbarossa01)
 
 ---
