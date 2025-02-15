@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserve Tickets</title>
+<link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header th:replace="~{fragments/header :: header}"></header>
+
+    <main>
+        <section class="reservation-section">
+            <h1 th:text="'Zrezerwuj bilet na ' + ${film.title}"></h1>
+            <p><strong>Category:</strong> <span th:text="${film.category}"></span></p>
+            <p><strong>Duration:</strong>
+                <span th:text="${film.duration / 60}"></span> godz.
+                <span th:text="${film.duration % 60}"></span> min
+            </p>
+                <img th:src="@{|https://foka.umg.edu.pl/~s49597/images/${film.image}|}" alt="Film Obraz">
+            <h2>Available Screenings</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Data</th>
+                        <th>Czas</th>
+                        <th>Sala</th>
+                        <th>Dostępne miejsca</th>
+                        <th>Akcja</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="screening : ${screenings}">
+                        <td th:text="${screening.id}"></td>
+                        <td th:text="${screening.date}"></td>
+                        <td th:text="${screening.time}"></td>
+                        <td th:text="${screening.hall}"></td>
+                        <td th:text="${screening.availableSeats}"></td>
+                        <td>
+                            <form th:action="@{/films/{id}/reserve(id=${film.id})}" method="post">
+                                <input type="hidden" name="screeningId" th:value="${screening.id}">
+                                <label for="seats">Dostępne miejsca:</label>
+                                <input type="number" name="seats" min="1" th:attr="max=${screening.availableSeats}" required>
+                                <button type="submit">Zarezerwuj</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

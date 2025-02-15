@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header th:replace="~{fragments/header :: header}"></header>
+    <main>
+        <h1>Kontakt</h1>
+        <p>Masz pytania? Skontaktuj się z nami!</p>
+        <p><strong>Email:</strong> kontakt@kino-plus.pl</p>
+        <p><strong>Telefon:</strong> +48 123 456 789</p>
+        <p><strong>Adres:</strong> ul. Filmowa 10, 00-001 Warszawa, Polska</p>
+    </main>
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

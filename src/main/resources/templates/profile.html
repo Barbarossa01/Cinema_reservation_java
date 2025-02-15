@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profil użytkownika</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <h1>Profil użytkownika</h1>
+
+    <!-- Success and Error Messages -->
+    <div>
+        <p th:if="${success}" th:text="${success}" style="color: green;"></p>
+        <p th:if="${error}" th:text="${error}" style="color: red;"></p>
+    </div>
+
+    <!-- Profile Information -->
+    <h2>Edytuj swój profil</h2>
+    <form th:action="@{/users/profile/edit}" method="post">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" th:value="${user.email}" readonly>
+        <br>
+        <label for="firstName">Imię:</label>
+        <input type="text" id="firstName" name="firstName" th:value="${user.firstName}" required>
+        <br>
+        <label for="lastName">Nazwisko:</label>
+        <input type="text" id="lastName" name="lastName" th:value="${user.lastName}" required>
+        <br>
+        <button type="submit">Zaktualizuj</button>
+    </form>
+
+    <!-- Reservation History -->
+    <h2>Twoje rezerwacje</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Film</th>
+                <th>Data</th>
+                <th>Czas</th>
+                <th>Miejsca</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="reservation : ${reservations}">
+                <td th:text="${reservation.screening.film.title}"></td>
+                <td th:text="${reservation.screening.date}"></td>
+                <td th:text="${reservation.screening.time}"></td>
+                <td th:text="${reservation.seats}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj seans</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main>
+    <h1>Dodaj seans</h1>
+
+    <form th:action="@{/screenings}" method="post">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="2">Szczegóły seansu</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Date -->
+                <tr>
+                    <td><label for="date">Data:</label></td>
+                    <td><input type="date" id="date" name="date" th:value="${screening.date}" required></td>
+                </tr>
+                <!-- Time -->
+                <tr>
+                    <td><label for="time">Czas:</label></td>
+                    <td><input type="time" id="time" name="time" th:value="${screening.time}" required></td>
+                </tr>
+                <!-- Hall -->
+                <tr>
+                    <td><label for="hall">Sala:</label></td>
+                    <td><input type="text" id="hall" name="hall" th:value="${screening.hall}" required></td>
+                </tr>
+                <!-- Film -->
+                <tr>
+                    <td><label for="film">Film:</label></td>
+                    <td>
+                        <select id="film" name="film.id" required>
+                            <option th:each="film : ${films}" th:value="${film.id}" th:text="${film.title}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <!-- Available Seats -->
+                <tr>
+                    <td><label for="availableSeats">Dostępne miejsca:</label></td>
+                    <td><input type="number" id="availableSeats" name="availableSeats" th:value="${screening.availableSeats}" required></td>
+                </tr>
+                <!-- Price -->
+                <tr>
+                    <td><label for="price">Cena:</label></td>
+                    <td><input type="number" step="0.01" id="price" name="price" th:value="${screening.price}" required></td>
+                </tr>
+                <!-- Screen Type -->
+                <tr>
+                    <td><label for="screenType">Typ ekranu:</label></td>
+                    <td>
+                        <select id="screenType" name="screenType" required>
+                            <option value="2D">2D</option>
+                            <option value="3D">3D</option>
+                            <option value="IMAX">IMAX</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="form-actions">
+            <button type="submit" class="btn">Dodaj seans</button>
+        </div>
+    </form>
+</main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+        const availableSeatsInput = document.getElementById("availableSeats");
+        const priceInput = document.getElementById("price");
+
+        form.addEventListener("submit", function (event) {
+            // Validate Available Seats
+            const availableSeats = parseInt(availableSeatsInput.value, 10);
+            if (isNaN(availableSeats) || availableSeats <= 0) {
+                alert("Available Seats must be a positive number.");
+                event.preventDefault(); // Prevent form submission
+                return;
+            }
+
+            // Validate Price
+            const price = parseFloat(priceInput.value);
+            if (isNaN(price) || price <= 0) {
+                alert("Price must be a positive number.");
+                event.preventDefault(); // Prevent form submission
+                return;
+            }
+        });
+
+        // Ensure only positive numbers are allowed during input
+        availableSeatsInput.addEventListener("input", function () {
+            if (this.value < 0) {
+                this.value = "";
+            }
+        });
+
+        priceInput.addEventListener("input", function () {
+            if (this.value < 0) {
+                this.value = "";
+            }
+        });
+    });
+</script>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+
+</body>
+</html>

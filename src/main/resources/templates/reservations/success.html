@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rezerwacja zakończona sukcesem!</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <main>
+        <h1>Rezerwacja zakończona sukcesem!</h1>
+        <p>Twój bilet został zarezerwowany. Proszę udać się do kasy kinowej w celu dokonania płatności.</p>
+        <a th:href="@{/films}" class="btn submit-btn">Powrót do filmów</a>
+    </main>
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

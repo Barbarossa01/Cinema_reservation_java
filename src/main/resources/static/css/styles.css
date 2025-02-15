@@ -1,0 +1,480 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+
+html, body {
+    height: 100%;
+    margin: 0; /* Remove default margin */
+    display: flex;
+    flex-direction: column; /* Make body a column layout */
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: #0073e6;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo img {
+    max-height: 50px;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+header nav ul li a:hover {
+    background-color: #005bb5;
+}
+
+/* Main Content */
+main {
+    flex: 1; /* This pushes the footer to the bottom when content is short */
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+/* Filter Section */
+.filter-section {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.filter-form input, .filter-form select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Movies List */
+.movies-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.movie {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+}
+
+.movie img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.movie-details {
+    padding: 15px;
+    text-align: center;
+}
+
+.movie-details h2 span {
+    color: #0073e6;
+}
+
+.movie-details button {
+    margin-top: 10px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.movie-details button:hover {
+    background-color: #005bb5;
+}
+
+/* Footer */
+
+footer {
+    background-color: #0073e6;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto; /* Ensures footer stays at the bottom */
+}
+
+/* Actions (Reserve, Edit, Delete Buttons) */
+.actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.actions .reserve-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.actions .reserve-btn:hover {
+    background-color: #218838;
+}
+
+.actions .edit-btn {
+    background-color: #ffc107;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.actions .edit-btn:hover {
+    background-color: #e0a800;
+}
+
+.actions .delete-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.actions .delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Index Page */
+.index-page .movies-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.index-page .movie {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+}
+
+.index-page .movie img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.index-page .movie-details {
+    padding: 15px;
+    text-align: center;
+}
+
+.index-page .movie-details h2 span {
+    color: #0073e6;
+}
+
+.index-page .movie-details button {
+    margin-top: 10px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.index-page .movie-details button:hover {
+    background-color: #005bb5;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+table thead {
+    background-color: #0073e6;
+    color: white;
+}
+
+table thead th {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 2px solid #005bb5;
+}
+
+table tbody td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Button Styles in Table */
+table tbody td form button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+table tbody td form button:hover {
+    background-color: #c82333;
+}
+
+
+/* General Styles */
+html, body {
+    height: 100%; /* Full height for the page */
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Makes the body a column-based layout */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Main Content */
+main {
+    flex: 1; /* Takes up remaining space between header and footer */
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+/* Header */
+header {
+    background-color: #0073e6;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo img {
+    max-height: 50px;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+header nav ul li a:hover {
+    background-color: #005bb5;
+}
+
+/* Footer */
+footer {
+    background-color: #0073e6;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto; /* Pushes the footer to the bottom */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+body.welcome-page {
+    background: linear-gradient(to right, #0073e6, #28a745);
+    color: white;
+}
+
+section {
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#home {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 50px 20px;
+    color: #f9f9f9;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+}
+
+#repertoire {
+    background: #fff;
+    color: #333;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+#repertoire button {
+    background: #0073e6;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+#repertoire button:hover {
+    background: #005bb5;
+}
+
+#features {
+    background: #f9f9f9;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.feature {
+    background: #fff;
+    flex: 1 1 30%;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.feature:hover {
+    transform: translateY(-10px);
+}
+
+.feature img {
+    width: 100%;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+footer {
+    margin-top: auto;
+    padding: 10px;
+    background: #0073e6;
+    color: white;
+    text-align: center;
+}
+
+/* General Button Styles */
+.actions .btn {
+    display: block; /* Makes buttons stack vertically */
+    width: 100%; /* Full-width buttons */
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 10px; /* Adds space between buttons */
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+}
+
+/* Edytuj Button */
+.actions .edit-btn {
+    background-color: #ffc107;
+    color: white;
+}
+
+.actions .edit-btn:hover {
+    background-color: #e0a800;
+}
+
+
+/* Anuluj Button */
+.actions .delete-btn {
+    background-color: #dc3545;
+    color: white;
+    cursor: pointer;
+}
+
+.actions .delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Zarezerwuj Button */
+.actions .reserve-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.actions .reserve-btn:hover {
+    background-color: #218838;
+}
+
+main h1 {
+    color: #0073e6;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+main p {
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: justify;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservations</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <main>
+        <h1>Reservation List</h1>
+        <div th:replace="fragments/flash-messages :: flash-messages"></div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Użytkownik</th>
+                    <th>Film</th>
+                    <th>Data</th>
+                    <th>Czas</th>
+                    <th>miejsca</th>
+                    <th>Akcja</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="reservation : ${reservations}">
+                    <td th:text="${reservation.id}"></td>
+                    <td th:text="${reservation.user.email}"></td>
+                    <td th:text="${reservation.screening.film.title}"></td>
+                    <td th:text="${reservation.screening.date}"></td>
+                    <td th:text="${reservation.screening.time}"></td>
+                    <td th:text="${reservation.seats}"></td>
+                    <td>
+<form th:action="@{/reservations/delete/{id}(id=${reservation.id})}" method="post">
+    <button type="submit" class="btn delete-btn" onclick="return confirm('Czy na pewno chcesz anulować tę rezerwację?')">Analuj</button>
+</form>
+
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(reservations)}">
+                    <td colspan="7">Nie znaleziono rezerwacji.</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<header>
+    <div class="logo">
+        <img th:src="@{|https://foka.umg.edu.pl/~s49597/images/logo.webp|}" alt="Kino+ Logo">
+        
+    </div>
+    <nav>
+        <ul class="menu">
+            <!-- Always visible -->
+<li><a th:href="@{/}">Strona główna</a></li>
+<li><a th:href="@{/films}">Repertuar</a></li>
+
+<li><a th:href="@{/static/about}">O nas</a></li>
+<li><a th:href="@{/static/contact}">Kontakt</a></li>
+
+
+
+            <!-- Links visible only to authenticated users -->
+<li sec:authorize="isAuthenticated()"><a th:href="@{/users/profile}">Moje Konto</a></li>
+
+            <!-- Administrator-only links -->
+            <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/films/create}">Dodaj Film</a></li>
+            <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/screenings}">Lista Seansów</a></li>
+            <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/screenings/create}">Dodaj Seans</a></li>
+            <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/reservations}">Lista Rezerwacji</a></li>
+
+            <!-- Links visible only to unauthenticated users -->
+            <li sec:authorize="!isAuthenticated()"><a href="@{/auth/login}">Zaloguj się</a></li>
+            <li sec:authorize="!isAuthenticated()"><a th:href="@{/auth/register}">Register</a></li>
+            
+                        <li sec:authorize="isAuthenticated()">
+				<form th:action="@{/logout}" method="POST" style="display:inline;">
+                    <button type="submit" style="background:none; border:none; color:inherit; cursor:pointer;">Wyloguj</button>
+                </form>
+            </li>
+            
+        </ul>
+    </nav>
+</header>

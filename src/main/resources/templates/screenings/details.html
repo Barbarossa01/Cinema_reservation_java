@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screening Details</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header th:replace="~{fragments/header :: header}"></header>
+
+    <main>
+        <section>
+            <h1 th:text="${screening.film.title}">Tytuł filmu</h1>
+            <p><strong>Data:</strong> <span th:text="${screening.date}"></span></p>
+            <p><strong>Czas:</strong> <span th:text="${screening.time}"></span></p>
+            <p><strong>Sala:</strong> <span th:text="${screening.hall}"></span></p>
+            <p><strong>Dostępne miejsca:</strong> <span th:text="${screening.availableSeats}"></span></p>
+            <p><strong>Cena:</strong> <span th:text="${screening.price}"></span> PLN</p>
+
+            <!-- Reservation Form -->
+            <form th:action="@{/reservations/create}" method="post">
+                <input type="hidden" name="screeningId" th:value="${screening.id}">
+
+                <label for="seats">Liczba miejsc:</label>
+                <input type="number" id="seats" name="seats" min="1" max="${screening.availableSeats}" required>
+
+                <button type="submit">Zarezerwuj</button>
+            </form>
+        </section>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>
+	

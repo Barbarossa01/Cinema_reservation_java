@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repertuar</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header th:replace="~{fragments/header :: header}"></header>
+
+    <main>
+        <!-- Filter Section -->
+        <section class="filter-section">
+            <h1>Repertuar</h1>
+            <form class="filter-form">
+                <label for="genre">Wybierz gatunek:</label>
+                <select id="genre">
+                    <option value="all">Wszystkie</option>
+                </select>
+            </form>
+        </section>
+
+        <!-- Movies List -->
+        <section class="movies-list" id="movies-list">
+            <div th:each="film : ${films}" class="movie" th:attr="data-category=${film.category.toLowerCase()}">
+                <img th:src="@{|https://foka.umg.edu.pl/~s49597/images/${film.image}|}" alt="Film Obraz">
+                <div class="movie-details">
+                    <h2>Film: <span th:text="${film.title}"></span></h2>
+                    <p><strong>Gatunek:</strong> <span th:text="${film.category}"></span></p>
+                    <p><strong>Czas trwania:</strong>
+                        <span th:text="${film.duration / 60}"></span> godz.
+                        <span th:text="${film.duration % 60}"></span> min
+                    </p>
+<div class="actions" th:if="${isAdmin}">
+    <!-- Edytuj Button -->
+    <a th:href="@{|/films/${film.id}/edit|}" class="btn edit-btn">Edytuj</a>
+    <br>
+
+    <!-- Anuluj Button -->
+    <form th:action="@{|/films/${film.id}/delete|}" method="post" style="display:inline;">
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit" class="btn delete-btn" onclick="return confirm('Czy na pewno?')">Usuń</button>
+    </form>
+    <br>
+</div>
+
+<!-- Zarezerwuj Button -->
+<div class="actions">
+    <a th:href="@{|/films/${film.id}/reserve|}" class="btn reserve-btn">Zarezerwuj</a>
+</div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+
+    <!-- JavaScript for Filtering -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const genreFilter = document.getElementById("genre");
+            const movies = document.querySelectorAll(".movie");
+
+            // Get unique categories from the movie list
+            const categories = new Set(); // Use a Set to ensure uniqueness
+            movies.forEach(movie => {
+                const category = movie.getAttribute("data-category");
+                if (category) {
+                    categories.add(category);
+                }
+            });
+
+            // Populate the genre filter dropdown
+            genreFilter.innerHTML = ""; // Clear existing options
+            genreFilter.insertAdjacentHTML("beforeend", '<option value="all">Wszystkie</option>');
+            categories.forEach(category => {
+                genreFilter.insertAdjacentHTML("beforeend", `<option value="${category}">${capitalize(category)}</option>`);
+            });
+
+            // Add event listener for filtering movies
+            genreFilter.addEventListener("change", function () {
+                const selectedGenre = genreFilter.value;
+
+                movies.forEach(movie => {
+                    const movieCategory = movie.getAttribute("data-category");
+                    if (selectedGenre === "all" || movieCategory === selectedGenre) {
+                        movie.style.display = "block"; // Show the movie
+                    } else {
+                        movie.style.display = "none"; // Hide the movie
+                    }
+                });
+            });
+
+            // Helper function to capitalize the first letter
+            function capitalize(str) {
+                return str.charAt(0).toUpperCase() + str.slice(1);
+            }
+        });
+    </script>
+</body>
+</html>

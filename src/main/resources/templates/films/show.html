@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film Details</title>
+   <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header th:replace="~{fragments/header :: header}"></header>
+
+    <main>
+        <section class="film-details">
+            <h1 th:text="${film.title}"></h1>
+            <p><strong>Gatunek:</strong> <span th:text="${film.category}"></span></p>
+            <p><strong>Czas trwania:</strong>
+                <span th:text="${film.duration / 60}"></span> godz.
+                <span th:text="${film.duration % 60}"></span> min
+            </p>
+            <p><strong>Opis:</strong> <span th:text="${film.description}"></span></p>
+                <img th:src="@{|https://foka.umg.edu.pl/~s49597/images/${film.image}|}" alt="Film Obraz">
+
+                            
+                
+                
+        </section>
+
+        <!-- Table of Screenings -->
+        <section class="screenings">
+            <h2>Seanse</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Data</th>
+                        <th>Godzina</th>
+                        <th>Sala</th>
+                        <th>Dostępne miejsca</th>
+                        <th>Cena</th>
+                        <th>Akcja</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="screening : ${screenings}">
+                        <td th:text="${screening.id}"></td>
+                        <td th:text="${screening.date}"></td>
+                        <td th:text="${screening.time}"></td>
+                        <td th:text="${screening.hall}"></td>
+                        <td th:text="${screening.availableSeats}"></td>
+                        <td th:text="${screening.price}"></td>
+                        
+                        <td>
+<form th:if="${#authentication.authenticated}" th:action="@{/films/{id}/reserve(id=${film.id})}" method="post">
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+    <input type="hidden" name="screeningId" th:value="${screening.id}">
+    <label for="seats">Miejsca</label>
+    <input type="number" id="seats" name="seats" min="1" th:attr="max=${screening.availableSeats}" required>
+    <button type="submit">Zarezerwuj</button>
+</form>
+<p th:if="${!#authentication.authenticated}">
+    <a href="/auth/login">Zaloguj się, aby dokonać rezerwacji</a>
+</p>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

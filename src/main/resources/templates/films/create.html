@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodaj Nowy Film</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        /* Add button styling */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        .colorful-btn {
+            background: linear-gradient(45deg, #56CCF2, #2F80ED);
+            color: #fff;
+            border: none;
+        }
+
+        .colorful-btn:hover {
+            background: linear-gradient(45deg, #2F80ED, #56CCF2);
+            transform: scale(1.05);
+        }
+
+        .colorful-btn-secondary {
+            background: linear-gradient(45deg, #EB5757, #FF6F6F);
+            color: #fff;
+            border: none;
+        }
+
+        .colorful-btn-secondary:hover {
+            background: linear-gradient(45deg, #FF6F6F, #EB5757);
+            transform: scale(1.05);
+        }
+
+        .form-actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .form-actions .btn {
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header th:replace="~{fragments/header :: header}"></header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="create-film">
+            <h1>Dodaj Nowy Film</h1>
+            <form th:action="@{/films}" method="POST" enctype="multipart/form-data" class="form-container">
+                <!-- CSRF Token -->
+                <input type="hidden" th:if="${_csrf != null}" name="_csrf" th:value="${_csrf.token}" />
+
+                <table class="form-table">
+                    <tr>
+                        <td><label for="title">Tytuł:</label></td>
+                        <td><input type="text" name="title" id="title" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="description">Opis:</label></td>
+                        <td><textarea name="description" id="description"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><label for="category">Kategoria:</label></td>
+                        <td><input type="text" name="category" id="category" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="duration">Czas trwania (minuty):</label></td>
+                        <td><input type="number" name="duration" id="duration" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="image">Obraz:</label></td>
+                        <td><input type="file" name="image" id="image"></td>
+                    </tr>
+                </table>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn colorful-btn">Zapisz</button>
+                    <a th:href="@{/films}" class="btn colorful-btn-secondary">Anuluj</a>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

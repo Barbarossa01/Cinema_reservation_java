@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle}">Cinema Reservation</title>
+<link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <main>
+        <div th:replace="fragments/flash-messages :: flash"></div>
+        <div th:insert="${content}"></div>
+    </main>
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

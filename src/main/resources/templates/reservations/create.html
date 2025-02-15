@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reserve Seats</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <main>
+        <h1>Zarezerwuj miejsca na <span th:text="${screening.film.title}"></span></h1>
+        <form th:action="@{/reservations/{screeningId}/store(screeningId=${screening.id})}" method="post" class="form-container">
+            <div class="form-group">
+                <label for="seats">Liczba miejsc:</label>
+                <input type="number" id="seats" name="seats" min="1" th:attr="max=${screening.availableSeats}" required>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn submit-btn">Zarezerwuj</button>
+                <a th:href="@{/films}" class="btn cancel-btn">Powrót do filmów</a>
+            </div>
+        </form>
+    </main>
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

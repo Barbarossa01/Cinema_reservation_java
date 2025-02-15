@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moje Rezerwacje</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header th:replace="~{fragments/header :: header}"></header>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/user/profile">Profile</a>
+            <a href="/logout">Wyloguj się</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Moje Rezerwacje</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Film</th>
+                    <th>Data</th>
+                    <th>Godzina</th>
+                    <th>Sala</th>
+                    <th>Liczba miejsc</th>
+                    <th>Akcja</th>
+                </tr>
+            </thead>
+            <tbody>
+                <th:block th:if="${#lists.isEmpty(reservations)}">
+                    <tr>
+                        <td colspan="6">Nie masz żadnych aktywnych rezerwacji.</td>
+                    </tr>
+                </th:block>
+                <th:block th:each="reservation : ${reservations}">
+                    <tr>
+                        <td th:text="${reservation.screening.film.title}"></td>
+                        <td th:text="${reservation.screening.date}"></td>
+                        <td th:text="${reservation.screening.time}"></td>
+                        <td th:text="${reservation.screening.hall}"></td>
+                        <td th:text="${reservation.seats}"></td>
+                        <td>
+                            <form th:action="@{/reservations/delete/{id}(id=${reservation.id})}" method="post">
+                                <button type="submit" onclick="return confirm('Czy na pewno chcesz anulować tę rezerwację?')">Anuluj</button>
+                            </form>
+                        </td>
+                    </tr>
+                </th:block>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

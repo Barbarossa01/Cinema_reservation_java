@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel użytkownika</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header th:replace="~{fragments/header :: header}"></header>
+
+    <main>
+        <section class="user-panel">
+            <h1>Panel użytkownika</h1>
+
+            <!-- Reservation History Section -->
+            <div class="reservation-history">
+                <h2>Historia rezerwacji</h2>
+                <table class="reservation-table">
+                    <thead>
+                        <tr>
+                            <th>Film</th>
+                            <th>Data</th>
+                            <th>Godzina</th>
+                            <th>Ilość miejsc</th>
+                            <th>Akcje</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="reservation : ${reservations}">
+                            <td th:text="${reservation.screening.film.title}"></td>
+                            <td th:text="${reservation.screening.date}"></td>
+                            <td th:text="${reservation.screening.time}"></td>
+                            <td th:text="${reservation.seats}"></td>
+                            
+                            <td>
+                                <form th:action="@{/reservations/delete/{id}(id=${reservation.id})}" method="post" style="display:inline;">
+                                    <button type="submit" class="delete-btn" onclick="return confirm('Czy na pewno chcesz usunąć tę rezerwację?')">Usuń</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Edit User Details Section -->
+            <div class="edit-details">
+                <h2>Edycja danych</h2>
+                <form th:action="@{/users/profile/edit}" method="post">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" th:value="${user.email}" required>
+
+                    <label for="firstName">Imię:</label>
+                    <input type="text" id="firstName" name="firstName" th:value="${user.firstName}" required>
+
+                    <label for="lastName">Nazwisko:</label>
+                    <input type="text" id="lastName" name="lastName" th:value="${user.lastName}" required>
+
+                    <label for="password">Nowe hasło:</label>
+                    <input type="password" id="password" name="password" placeholder="Wprowadź nowe hasło">
+
+                    <button type="submit">Zapisz zmiany</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

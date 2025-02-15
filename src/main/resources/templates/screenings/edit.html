@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edytuj seans</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <main>
+        <h1>Edytuj seans</h1>
+        <form th:action="@{/screenings/{id}(id=${screening.id})}" th:method="put">
+            <label for="date">Data:</label>
+            <input type="date" id="date" name="date" th:value="${screening.date}" required>
+
+            <label for="time">Czas:</label>
+            <input type="time" id="time" name="time" th:value="${screening.time}" required>
+
+            <label for="hall">Sala:</label>
+            <input type="text" id="hall" name="hall" th:value="${screening.hall}" required>
+
+<label for="film_id">Film:</label>
+<select id="film_id" name="filmId" required>
+    <option th:each="film : ${films}" th:value="${film.id}" 
+            th:selected="${film.id == screening.film.id}" 
+            th:text="${film.title}">
+    </option>
+</select>
+
+
+            <label for="available_seats">Dostępne miejsc:</label>
+            <input type="number" id="available_seats" name="availableSeats" th:value="${screening.availableSeats}" required>
+
+            <label for="price">Cena:</label>
+            <input type="number" step="0.01" id="price" name="price" th:value="${screening.price}" required>
+
+            <label for="screen_type">Rodzaj seansu:</label>
+            <select id="screen_type" name="screenType" required>
+                <option value="2D" th:selected="${screening.screenType == '2D'}">2D</option>
+                <option value="3D" th:selected="${screening.screenType == '3D'}">3D</option>
+                <option value="IMAX" th:selected="${screening.screenType == 'IMAX'}">IMAX</option>
+            </select>
+
+            <button type="submit">Zapisz zmiany</button>
+        </form>
+        <div class="actions">
+            <a th:href="@{/screenings}" class="btn cancel-btn">Powrót do listy</a>
+        </div>
+    </main>
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seanse</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+</head>
+<body>
+    <header th:replace="~{fragments/header :: header}"></header>
+
+    <main>
+        <h1>Seanse</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Data</th>
+                    <th>Czas</th>
+                    <th>Sala</th>
+                    <th>Film</th>
+                    <th>Dostępne miejsc</th>
+                    <th>Cena</th>
+                    <th>Rodzaj seansu:</th>
+                    <th>Akcja</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="screening : ${screenings}">
+                    <td th:text="${screening.id}"></td>
+                    <td th:text="${screening.date}"></td>
+                    <td th:text="${screening.time}"></td>
+                    <td th:text="${screening.hall}"></td>
+                    <td th:text="${screening.film.title}"></td>
+                    <td th:text="${screening.availableSeats}"></td>
+                    <td th:text="${screening.price}"></td>
+                    <td th:text="${screening.screenType}"></td>
+                    <td>
+                        <div class="actions">
+                            <a th:href="@{/screenings/{id}/edit(id=${screening.id})}" class="btn edit-btn">Edytuj</a>
+                            <form th:action="@{/screenings/{id}(id=${screening.id})}" method="post">
+                                <input type="hidden" name="_method" value="delete">
+                                <button type="submit" class="btn btn-danger">Usuń</button>
+                                </form>
+                            
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>
