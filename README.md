@@ -32,7 +32,6 @@ The **Cinema Reservation System** is a Java Spring Boot web application that all
 
 - **Java Spring Boot** - Backend framework.
 - **Thymeleaf** - Server-side template engine for views.
-- **Spring Security** - User authentication and authorization.
 - **Hibernate (JPA)** - ORM for database interactions.
 - **PostgreSQL** - Database for storing system data.
 - **Maven** - Dependency management.
